@@ -49,7 +49,7 @@ public abstract class ChessPiece
     {
         if (legalMove(newLocation))
         {
-            getGame().getChessBoard().removePiece(getLocation());   // removes the knight from the old location
+            getGame().getChessBoard().removePiece(location);   // removes the knight from the old location
             getGame().getChessBoard().placePieceAt(this, newLocation);  // places the knight at the new location
             setLocation(newLocation);
         } else
