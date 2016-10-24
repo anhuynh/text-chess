@@ -36,10 +36,7 @@ public class Knight extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if (newLocation.getRow() == location.getRow() && newLocation.getCol() == location.getCol()) // if the location is the same it is still valid
-        {
-            return true;
-        } else if ((Math.abs(newLocation.getRow() - location.getRow()) == 2) && (Math.abs(newLocation.getCol() - location.getCol()) == 1))
+        if ((Math.abs(newLocation.getRow() - location.getRow()) == 2) && (Math.abs(newLocation.getCol() - location.getCol()) == 1))
         {
             return true;
         } else if ((Math.abs(newLocation.getRow() - location.getRow()) == 1) && (Math.abs(newLocation.getCol() - location.getCol()) == 2))

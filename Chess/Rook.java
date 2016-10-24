@@ -37,7 +37,7 @@ public class Rook extends ChessPiece
     {
         if (newLocation.getRow() == location.getRow() && newLocation.getCol() == location.getCol()) // if the location is the same it is still valid
         {
-            return true;
+            return false;
         } else if (newLocation.getRow() == location.getRow() || newLocation.getCol() == location.getCol())
         {
             return true;

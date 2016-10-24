@@ -37,10 +37,7 @@ public class Pawn extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if (newLocation.getRow() == location.getRow() && newLocation.getCol() == location.getCol()) // if the location is the same it is still valid
-        {
-            return true;
-        } else if (firstMove && newLocation.getCol() == location.getCol() && (newLocation.getRow() - location.getRow() == 2 || newLocation.getRow() - location.getRow() == 1))
+        if (firstMove && newLocation.getCol() == location.getCol() && (newLocation.getRow() - location.getRow() == 2 || newLocation.getRow() - location.getRow() == 1))
         {
             firstMove = false;
             return true;
