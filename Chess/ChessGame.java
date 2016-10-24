@@ -13,6 +13,7 @@ public class ChessGame
     private String player2;
     private Pawn pawn;
     private Rook rook;
+    private Bishop bishop;
 
     /**
      * Constructor for objects of class ChessGame. Creates a new chess board and new knight
@@ -27,6 +28,7 @@ public class ChessGame
         knight = new Knight(player2, new ChessLocation(0,1), this);
         pawn = new Pawn(player2, new ChessLocation(1,0), this);
         rook = new Rook(player2, new ChessLocation(0,0), this);
+        bishop = new Bishop(player2, new ChessLocation(0,2), this);
     }
     
     public ChessBoard getChessBoard()

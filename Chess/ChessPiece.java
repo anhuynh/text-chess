@@ -9,7 +9,7 @@ public abstract class ChessPiece
 {
     private ChessGame game; // determine which game this piece belongs to
     private String player;  // owner of the piece
-    private ChessLocation location; // current location of the piece
+    protected ChessLocation location; // current location of the piece
     protected char id; // identifies the type of chess piece
 
     /**
