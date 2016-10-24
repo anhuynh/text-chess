@@ -16,7 +16,7 @@ public class PlayGame
     public static void main (String[] args)
     {
         Scanner reader = new Scanner(System.in);
-        ChessGame game = new ChessGame();
+        ChessGame game = new ChessGame("p1", "p2");
         
         System.out.println("\nMove the knight around the chess board!");
         
@@ -25,7 +25,7 @@ public class PlayGame
         {
             ChessLocation location = game.getKnight().getLocation();
             System.out.println("\nHere is the current board:\n");
-            game.getChessBoard().printBoard();
+            System.out.println(game.getChessBoard().toString());
             
             System.out.println("Knight's current location: " + location.getRow() + "," + location.getCol());
             System.out.println("Enter a new location (row,col e.g. \"2,2\") or enter \"q\" to quit.");

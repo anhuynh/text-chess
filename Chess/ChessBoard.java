@@ -43,20 +43,12 @@ public class ChessBoard
                     stringBoard += "-  ";
                 } else
                 {
-                    stringBoard += "K  ";
+                    stringBoard += cell.toString() + "  ";
                 }
             }
             stringBoard += "\n";
         }
         return stringBoard;
-    }
-    
-    /**
-     *  Prints the board
-     */
-    public void printBoard()
-    {
-        System.out.println(toString());
     }
     
     /**

@@ -9,15 +9,20 @@ public class ChessGame
 {
     private ChessBoard board;
     private Knight knight;
+    private String player1;
+    private String player2;
 
     /**
      * Constructor for objects of class ChessGame. Creates a new chess board and new knight
      * that is initialised at location 0,1
      */
-    public ChessGame()
+    public ChessGame(String player1, String player2)
     {
+        this.player1 = player1;
+        this.player2 = player2;
+
         board = new ChessBoard();
-        knight = new Knight("Black", new ChessLocation(0,1), this);
+        knight = new Knight(player2, new ChessLocation(0,1), this);
     }
     
     public ChessBoard getChessBoard()
@@ -28,5 +33,15 @@ public class ChessGame
     public Knight getKnight()
     {
         return knight;
+    }
+
+    public String getP1()
+    {
+        return player1;
+    }
+
+    public String getP2()
+    {
+        return player2;
     }
 }

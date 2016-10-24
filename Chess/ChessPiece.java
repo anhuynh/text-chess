@@ -84,4 +84,9 @@ public abstract class ChessPiece
     {
         return game;
     }
+
+    public String toString()
+    {
+        return String.valueOf(id);
+    }
 }
