@@ -37,14 +37,14 @@ public class Pawn extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if (newLocation.getRow() == getLocation().getRow() && newLocation.getCol() == getLocation().getCol()) // if the location is the same it is still valid
+        if (newLocation.getRow() == location.getRow() && newLocation.getCol() == location.getCol()) // if the location is the same it is still valid
         {
             return true;
-        } else if (firstMove && newLocation.getCol() == getLocation().getCol() && (newLocation.getRow() - getLocation().getRow() == 2 || newLocation.getRow() - getLocation().getRow() == 1))
+        } else if (firstMove && newLocation.getCol() == location.getCol() && (newLocation.getRow() - location.getRow() == 2 || newLocation.getRow() - location.getRow() == 1))
         {
             firstMove = false;
             return true;
-        } else if (newLocation.getRow() - getLocation().getRow() == 1 && newLocation.getCol() == getLocation().getCol())
+        } else if (newLocation.getRow() - location.getRow() == 1 && newLocation.getCol() == location.getCol())
         {
             return true;
         } else 

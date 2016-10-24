@@ -35,10 +35,10 @@ public class Rook extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if (newLocation.getRow() == getLocation().getRow() && newLocation.getCol() == getLocation().getCol()) // if the location is the same it is still valid
+        if (newLocation.getRow() == location.getRow() && newLocation.getCol() == location.getCol()) // if the location is the same it is still valid
         {
             return true;
-        } else if (newLocation.getRow() == getLocation().getRow() || newLocation.getCol() == getLocation().getCol())
+        } else if (newLocation.getRow() == location.getRow() || newLocation.getCol() == location.getCol())
         {
             return true;
         } else 
