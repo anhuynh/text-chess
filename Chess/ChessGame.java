@@ -15,6 +15,7 @@ public class ChessGame
     private Rook rook;
     private Bishop bishop;
     private King king;
+    private Queen queen;
 
     /**
      * Constructor for objects of class ChessGame. Creates a new chess board and new knight
@@ -31,6 +32,7 @@ public class ChessGame
         rook = new Rook(player2, new ChessLocation(0,0), this);
         bishop = new Bishop(player2, new ChessLocation(0,2), this);
         king = new King(player2, new ChessLocation(0,4), this);
+        queen = new Queen(player2, new ChessLocation(0,3), this);
     }
     
     public ChessBoard getChessBoard()
