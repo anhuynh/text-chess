@@ -44,12 +44,9 @@ public class PlayGame
                 int row = Integer.parseInt(inp.split(",")[0].trim());
                 int col = Integer.parseInt(inp.split(",")[1].trim());
 
-                if (row < 8 && row >= 0 && col < 8 && col >= 0) // checks bounds of the input to ensure it is between 0 and 7
+                if (inBounds(row, col)) // checks bounds of the input to ensure it is between 0 and 7
                 {
                     game.getKnight().moveTo(new ChessLocation(row,col));
-                } else 
-                {
-                    System.out.println("\nInvalid location: out of bounds");
                 }
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e)  // catches errors in the case that user inputs something other than the proper command
             {
@@ -58,6 +55,18 @@ public class PlayGame
             {
                 System.out.println("\nI don't know what happened. You did something bad :(\n");
             }
+        }
+    }
+
+    private static boolean inBounds(int row, int col)
+    {
+        if (row < 8 && row >= 0 && col < 8 && col >= 0) // checks bounds of the input to ensure it is between 0 and 7
+        {
+            return true;
+        } else 
+        {
+            System.out.println("\nInvalid location: out of bounds");
+            return false;
         }
     }
 }

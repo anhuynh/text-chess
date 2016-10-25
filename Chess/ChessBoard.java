@@ -53,6 +53,18 @@ public class ChessBoard
     
     /**
      * Checks if a piece is at the specified location
+     *
+     * @param row   row of the location
+     * @param col   column of the location
+     * @return      true if the piece is at specified location, otherwise false
+     */
+    public ChessPiece getPieceAt(ChessLocation location)
+    {
+        return board[location.getRow()][location.getCol()];
+    }
+
+    /**
+     * Checks if a piece is at the specified location
      * 
      * @param row   row of the location
      * @param col   column of the location
