@@ -26,7 +26,7 @@ public class PlayGame
             System.out.println("\nHere is the current board:\n");
             System.out.println(game.getChessBoard().toString());
 
-            System.out.println("Enter a location (row,col e.g. \"2,2\") of the piece to move or enter \"q\" to quit");
+            System.out.println("Enter a location (row,col e.g. \"0,2\") of the piece to move or enter \"q\" to quit");
             System.out.print(">> ");
             String inp = reader.nextLine(); // takes in the user's input
             
@@ -42,7 +42,7 @@ public class PlayGame
             {
                 if (game.getChessBoard().isPieceAt(sourceLocation.getRow(), sourceLocation.getCol()))
                 {
-                    System.out.println("\nYou have selected: " + game.getChessBoard().getPieceAt(sourceLocation).toString() + ". Enter a location to move to");
+                    System.out.println("\nYou have selected " + game.getChessBoard().getPieceAt(sourceLocation).toString() + " at location " + sourceLocation.getRow() + "," + sourceLocation.getCol() + ". Enter a location to move to");
                     System.out.print(">> ");
                     inp = reader.nextLine(); // takes in the user's input
                     ChessLocation destLocation = parseCommand(inp);
