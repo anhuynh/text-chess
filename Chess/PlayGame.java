@@ -23,12 +23,10 @@ public class PlayGame
         boolean finished = false;
         while (!finished)
         {
-            ChessLocation location = game.getKnight().getLocation();
             System.out.println("\nHere is the current board:\n");
             System.out.println(game.getChessBoard().toString());
-            
-            System.out.println("Knight's current location: " + location.getRow() + "," + location.getCol());
-            System.out.println("Enter a new location (row,col e.g. \"2,2\") or enter \"q\" to quit.");
+
+            System.out.println("Enter a location (row,col e.g. \"2,2\") of the piece to move or enter \"q\" to quit");
             System.out.print(">> ");
             String inp = reader.nextLine(); // takes in the user's input
             
@@ -39,34 +37,49 @@ public class PlayGame
                 continue;
             }
             
-            try // attempt to parse the input for a row and col
+            ChessLocation sourceLocation = parseCommand(inp);
+            if (sourceLocation != null)
             {
-                int row = Integer.parseInt(inp.split(",")[0].trim());
-                int col = Integer.parseInt(inp.split(",")[1].trim());
-
-                if (inBounds(row, col)) // checks bounds of the input to ensure it is between 0 and 7
+                if (game.getChessBoard().isPieceAt(sourceLocation.getRow(), sourceLocation.getCol()))
                 {
-                    game.getKnight().moveTo(new ChessLocation(row,col));
+                    System.out.println("\nYou have selected: " + game.getChessBoard().getPieceAt(sourceLocation).toString() + ". Enter a location to move to");
+                    System.out.print(">> ");
+                    inp = reader.nextLine(); // takes in the user's input
+                    ChessLocation destLocation = parseCommand(inp);
+                    if (destLocation != null) 
+                    {
+                        game.getChessBoard().getPieceAt(sourceLocation).moveTo(destLocation);
+                    }
+                } else
+                {
+                    System.out.println("\nThere is no piece there. Please try again.\n");
                 }
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e)  // catches errors in the case that user inputs something other than the proper command
-            {
-                System.out.println("\nInvalid command");
-            } catch (Exception e) // catches all other errors
-            {
-                System.out.println("\nI don't know what happened. You did something bad :(\n");
             }
         }
     }
 
-    private static boolean inBounds(int row, int col)
+    private static ChessLocation parseCommand(String input)
     {
-        if (row < 8 && row >= 0 && col < 8 && col >= 0) // checks bounds of the input to ensure it is between 0 and 7
+        try // attempt to parse the input for a row and col
         {
-            return true;
-        } else 
+            int row = Integer.parseInt(input.split(",")[0].trim());
+            int col = Integer.parseInt(input.split(",")[1].trim());
+
+            if (row < 8 && row >= 0 && col < 8 && col >= 0) // checks bounds of the input to ensure it is between 0 and 7
+            {
+                return new ChessLocation(row, col);
+            }
+            
+            System.out.println("\nInvalid location: out of bounds\n");
+            return null;
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e)  // catches errors in the case that user inputs something other than the proper command
         {
-            System.out.println("\nInvalid location: out of bounds");
-            return false;
+            System.out.println("\nInvalid command\n");
+            return null;
+        } catch (Exception e) // catches all other errors
+        {
+            System.out.println("\nI don't know what happened. You did something bad :(\n");
+            return null;
         }
     }
 }

@@ -29,34 +29,30 @@ public abstract class ChessPiece
     }
 
     /**
-     * Checks if there is another piece blocking a move
-     *
-     * @param  start            start position
-     * @param  end              end position
-     */
-    // TODO
-    protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
-    {
-        return false;
-    }
-
-    /**
      * Moves the knight to the specified location if it is a legal move
      * 
      * @param  newLocation      location to move the piece to
      */
     public void moveTo(ChessLocation newLocation)
     {
-        if (legalMove(newLocation))
+        if (legalMove(newLocation) && checkLineOfSight(location, newLocation))
         {
             getGame().getChessBoard().removePiece(location);   // removes the knight from the old location
             getGame().getChessBoard().placePieceAt(this, newLocation);  // places the knight at the new location
             setLocation(newLocation);
         } else
         {
-            System.out.println("\nInvalid location: illegal move");
+            if (!legalMove(newLocation))
+            {
+                System.out.println("\nInvalid location: illegal move\n");
+            } else
+            {
+                System.out.println("\nInvalid location: blocked by another piece\n");
+            }
         }
     }
+
+    protected abstract boolean checkLineOfSight(ChessLocation start, ChessLocation end);
 
     protected abstract boolean legalMove(ChessLocation newLocation);
 

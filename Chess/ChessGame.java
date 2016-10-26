@@ -27,22 +27,17 @@ public class ChessGame
         this.player2 = player2;
 
         board = new ChessBoard();
-        knight = new Knight(player2, new ChessLocation(0,1), this);
-        pawn = new Pawn(player2, new ChessLocation(1,0), this);
-        rook = new Rook(player2, new ChessLocation(0,0), this);
-        bishop = new Bishop(player2, new ChessLocation(0,2), this);
-        king = new King(player2, new ChessLocation(0,4), this);
-        queen = new Queen(player2, new ChessLocation(0,3), this);
+        knight = new Knight(player1, new ChessLocation(0,1), this);
+        pawn = new Pawn(player1, new ChessLocation(1,0), this);
+        rook = new Rook(player1, new ChessLocation(0,0), this);
+        bishop = new Bishop(player1, new ChessLocation(0,2), this);
+        king = new King(player1, new ChessLocation(0,4), this);
+        queen = new Queen(player1, new ChessLocation(0,3), this);
     }
     
     public ChessBoard getChessBoard()
     {
         return board;
-    }
-    
-    public Knight getKnight()
-    {
-        return knight;
     }
 
     public String getP1()

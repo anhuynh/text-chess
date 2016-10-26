@@ -41,4 +41,14 @@ public class ChessLocation
     {
         this.col = col;
     }
+
+    public boolean equals(ChessLocation checkLocation)
+    {
+        if (row == checkLocation.row && col == checkLocation.col)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

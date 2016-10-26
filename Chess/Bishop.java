@@ -35,7 +35,7 @@ public class Bishop extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if (newLocation.getRow() == location.getRow() && newLocation.getCol() == location.getCol()) // if the location is the same it is still valid
+        if (location.equals(newLocation)) // if the location is the same it is still valid
         {
             return false;
         } else if (Math.abs(newLocation.getRow() - location.getRow()) == Math.abs(newLocation.getCol() - location.getCol()))
@@ -45,5 +45,47 @@ public class Bishop extends ChessPiece
         {
             return false;
         }
+    }
+
+    protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
+    {
+        if (start.getRow() - end.getRow() > 0 && start.getCol() - end.getCol() > 0) 
+        {
+            for (int row = start.getRow() - 1, col = start.getCol() - 1; row >= end.getRow(); row--, col--)
+            {
+                if (getGame().getChessBoard().isPieceAt(row, col))
+                {
+                    return false;
+                }
+            }
+        } else if (start.getRow() - end.getRow() > 0 && start.getCol() - end.getCol() < 0)
+        {
+            for (int row = start.getRow() - 1, col = start.getCol() + 1; row >= end.getRow(); row--, col++)
+            {
+                if (getGame().getChessBoard().isPieceAt(row, col))
+                {
+                    return false;
+                }
+            }
+        } else if (start.getRow() - end.getRow() < 0 && start.getCol() - end.getCol() > 0)
+        {
+            for (int row = start.getRow() + 1, col = start.getCol() - 1; row <= end.getRow(); row++, col--)
+            {
+                if (getGame().getChessBoard().isPieceAt(row, col))
+                {
+                    return false;
+                }
+            }
+        } else if (start.getRow() - end.getRow() < 0 && start.getCol() - end.getCol() < 0)
+        {
+            for (int row = start.getRow() + 1, col = start.getCol() + 1; row <= end.getRow(); row++, col++)
+            {
+                if (getGame().getChessBoard().isPieceAt(row, col))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

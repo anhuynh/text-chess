@@ -35,7 +35,7 @@ public class Rook extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if (newLocation.getRow() == location.getRow() && newLocation.getCol() == location.getCol()) // if the location is the same it is still valid
+        if (location.equals(newLocation)) // if the location is the same it is still valid
         {
             return false;
         } else if (newLocation.getRow() == location.getRow() || newLocation.getCol() == location.getCol())
@@ -45,5 +45,47 @@ public class Rook extends ChessPiece
         {
             return false;
         }
+    }
+
+    protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
+    {
+        if (end.getRow() == start.getRow() && start.getCol() < end.getCol())
+        {
+            for (int i = start.getCol() + 1; i <= end.getCol(); i++) 
+            {
+                if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
+                {
+                    return false;
+                }
+            }
+        } else if (end.getRow() == start.getRow() && start.getCol() > end.getCol())
+        {
+            for (int i = start.getCol() - 1; i >= end.getCol(); i--) 
+            {
+                if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
+                {
+                    return false;
+                }
+            }
+        } else if (end.getCol() == start.getCol() && start.getRow() < end.getRow())
+        {
+            for (int i = start.getRow() + 1; i <= end.getRow(); i++) 
+            {
+                if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
+                {
+                    return false;
+                }
+            }
+        } else if (end.getCol() == start.getCol() && start.getRow() > end.getRow())
+        {
+            for (int i = start.getRow() - 1; i >= end.getRow(); i--) 
+            {
+                if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

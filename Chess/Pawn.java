@@ -49,4 +49,28 @@ public class Pawn extends ChessPiece
             return false;
         }
     }
+
+    protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
+    {
+        if (getOwner().equals(getGame().getP1()))
+        {
+            if (end.getRow() - start.getRow() == 2 && getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().isPieceAt(start.getRow() + 1, start.getCol() + 1))
+            {
+                return false;
+            } else if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))
+            {
+                return false;
+            }
+        } else
+        {
+            if (start.getRow() - end.getRow() == 2 && getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().isPieceAt(start.getRow() - 1, start.getCol() - 1))
+            {
+                return false;
+            } else if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

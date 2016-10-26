@@ -47,4 +47,13 @@ public class Knight extends ChessPiece
             return false;
         }
     }
+
+    protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
+    {
+        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))
+        {
+            return false;
+        }
+        return true;
+    }
 }
