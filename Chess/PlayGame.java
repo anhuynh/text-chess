@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Handles the game loop
  * 
  * @author An Huynh
- * @version version 1.0 (2016.10.09)
+ * @version 2016.11.06
  */
 public class PlayGame
 {
@@ -30,25 +30,27 @@ public class PlayGame
             System.out.print(">> ");
             String inp = reader.nextLine(); // takes in the user's input
             
-            if (inp.equals("q"))
+            if (inp.equals("q")) // if user inputs "q", the game will finish
             {
                 System.out.println("\nSee you next time!");
                 finished = true;
                 continue;
             }
             
-            ChessLocation sourceLocation = parseCommand(inp);
+            ChessLocation sourceLocation = parseCommand(inp); // attempt to parse the input for a location
             if (sourceLocation != null)
             {
-                if (game.getChessBoard().isPieceAt(sourceLocation.getRow(), sourceLocation.getCol()))
+                if (game.getChessBoard().isPieceAt(sourceLocation.getRow(), sourceLocation.getCol())) // checks to see if there is a piece at the source location
                 {
-                    System.out.println("\nYou have selected " + game.getChessBoard().getPieceAt(sourceLocation).toString() + " at location " + sourceLocation.getRow() + "," + sourceLocation.getCol() + ". Enter a location to move to");
+                    ChessPiece sourcePiece = game.getChessBoard().getPieceAt(sourceLocation);
+                    System.out.println("\nYou have selected " + sourcePiece.toString() + " at location " + sourcePiece.locationString() + ". Enter a location to move to");
                     System.out.print(">> ");
                     inp = reader.nextLine(); // takes in the user's input
-                    ChessLocation destLocation = parseCommand(inp);
+
+                    ChessLocation destLocation = parseCommand(inp); // attempt to parse the input for a location
                     if (destLocation != null) 
                     {
-                        game.getChessBoard().getPieceAt(sourceLocation).moveTo(destLocation);
+                        sourcePiece.moveTo(destLocation); // move the piece if it is a legal move
                     }
                 } else
                 {
@@ -58,6 +60,12 @@ public class PlayGame
         }
     }
 
+    /**
+     * Attempts to parse the input string for a location
+     *
+     * @param input             input string to parse location
+     * @return                  ChessLocation containing the parsed location, returns null if input location is out of bounds or parsing fails
+     */
     private static ChessLocation parseCommand(String input)
     {
         try // attempt to parse the input for a row and col

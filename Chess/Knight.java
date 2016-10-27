@@ -3,7 +3,7 @@
  * A knight piece that can be moved and checks the legality of the move
  * 
  * @author An Huynh
- * @version version 1.0 (2016.10.09)
+ * @version 2016.11.06
  */
 public class Knight extends ChessPiece
 {
@@ -11,14 +11,14 @@ public class Knight extends ChessPiece
      * Constructor for objects of class Knight. Places the knight on the chess board
      *
      * @param owner             owner to which the piece belongs to
-     * @param initialLocation   starting position of the knight
+     * @param initialLocation   starting location of the knight
      * @param game              game that the knight belongs to
      */
     public Knight(String owner, ChessLocation initialLocation, ChessGame game)
     {
         super(owner, initialLocation, game);
 
-        if (owner.equals(game.getP1()))
+        if (owner.equals(game.getP1())) // assigns lettercase depending on owner
         {
             id = 'N';
         } else
@@ -42,12 +42,17 @@ public class Knight extends ChessPiece
         } else if ((Math.abs(newLocation.getRow() - location.getRow()) == 1) && (Math.abs(newLocation.getCol() - location.getCol()) == 2))
         {
             return true;
-        } else 
-        {
-            return false;
         }
+        return false;
     }
 
+    /**
+     * Checks for a piece at the end location
+     *
+     * @param start             starting location to check
+     * @param end               end location to check
+     * @return                  true if there is no piece on the end location, otherwise false
+     */
     protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
     {
         if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))

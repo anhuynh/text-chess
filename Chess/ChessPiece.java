@@ -3,7 +3,7 @@
  * Superclass for chess pieces
  * 
  * @author An Huynh
- * @version version 2.0 (2016.11.06)
+ * @version 2016.11.06
  */
 public abstract class ChessPiece
 {
@@ -16,7 +16,7 @@ public abstract class ChessPiece
      * Constructor for chess pieces. Places the piece on the chess board
      *
      * @param owner             owner to which the piece belongs to
-     * @param initialLocation   starting position of the piece
+     * @param initialLocation   starting location of the piece
      * @param game              game that the piece belongs to
      */
     public ChessPiece(String owner, ChessLocation initialLocation, ChessGame game)
@@ -29,7 +29,7 @@ public abstract class ChessPiece
     }
 
     /**
-     * Moves the knight to the specified location if it is a legal move
+     * Moves the piece to the specified location if it is a legal move
      * 
      * @param  newLocation      location to move the piece to
      */
@@ -37,9 +37,9 @@ public abstract class ChessPiece
     {
         if (legalMove(newLocation) && checkLineOfSight(location, newLocation))
         {
-            getGame().getChessBoard().removePiece(location);   // removes the knight from the old location
-            getGame().getChessBoard().placePieceAt(this, newLocation);  // places the knight at the new location
-            setLocation(newLocation);
+            getGame().getChessBoard().removePiece(location);   // removes the piece from the old location
+            getGame().getChessBoard().placePieceAt(this, newLocation);  // places the piece at the new location
+            location = newLocation;
         } else
         {
             if (!legalMove(newLocation))
@@ -52,35 +52,53 @@ public abstract class ChessPiece
         }
     }
 
+    /** Each subclass has it's own algorithm of checking line of sight */
     protected abstract boolean checkLineOfSight(ChessLocation start, ChessLocation end);
 
+    /** Each subclass has it's own algorithm for checking legality */
     protected abstract boolean legalMove(ChessLocation newLocation);
 
     /**
-     * Sets the location of the piece
-     *
-     * @param location          new location
+    *
+     * @return                  string that contains current location of the piece
      */
-    public void setLocation(ChessLocation location)
+    public String locationString()
     {
-        this.location = location;
+        return location.getRow() + "," + location.getCol();
     }
 
+    /**
+     *
+     * @return                  string of owner of piece
+     */
     public String getOwner()
     {
         return player;
     }
 
+    /**
+     *
+     * @return                  current location of the piece
+     */
     public ChessLocation getLocation()
     {
         return location;
     }
 
+    /**
+     *
+     * @return                  return game to which the piece belongs to
+     */
     public ChessGame getGame()
     {
         return game;
     }
 
+    /**
+     * String representation of the piece
+     *
+     * @return                  string with character id of the piece
+     */
     public String toString()
     {
         return String.valueOf(id);

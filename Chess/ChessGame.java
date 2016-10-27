@@ -3,7 +3,7 @@
  * This class holds the board and pieces.
  * 
  * @author An Huynh
- * @version version 1.0 (2016.10.09)
+ * @version 2016.11.06
  */
 public class ChessGame
 {
@@ -28,8 +28,11 @@ public class ChessGame
     private Queen queen;
 
     /**
-     * Constructor for objects of class ChessGame. Creates a new chess board and new knight
-     * that is initialised at location 0,1
+     * Constructor for objects of class ChessGame. Creates a new chess board and initializes
+     * all pieces to their proper locations
+     *
+     * @param player1           string of player 1 name
+     * @param player2           string of player 2 name
      */
     public ChessGame(String player1, String player2)
     {
@@ -37,6 +40,7 @@ public class ChessGame
         this.player2 = player2;
 
         board = new ChessBoard();
+        // initialize all pieces to the proper locations
         knight1 = new Knight(player1, new ChessLocation(0,1), this);
         knight2 = new Knight(player1, new ChessLocation(0,6), this);
         pawn1 = new Pawn(player1, new ChessLocation(1,0), this);
@@ -55,16 +59,28 @@ public class ChessGame
         queen = new Queen(player1, new ChessLocation(0,3), this);
     }
     
+    /**
+     *
+     * @return                  chessboard array
+     */
     public ChessBoard getChessBoard()
     {
         return board;
     }
 
+    /**
+     *
+     * @return                  player1 string
+     */
     public String getP1()
     {
         return player1;
     }
 
+    /**
+     *
+     * @return                  player2 string
+     */
     public String getP2()
     {
         return player2;

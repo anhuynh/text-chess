@@ -4,12 +4,11 @@
  * a chess board.
  * 
  * @author An Huynh
- * @version version 1.0 (2016.10.09)
+ * @version 2016.11.06
  */
 public class ChessBoard
 {
-    // board is an array of chess pieces
-    private ChessPiece[][] board;
+    private ChessPiece[][] board; // board is an array of chess pieces
 
     /**
      * Constructor for objects of class ChessBoard
@@ -28,6 +27,11 @@ public class ChessBoard
         }
     }
     
+    /**
+     * String representation of the board
+     *
+     * @return                  string with board elements
+     */
     public String toString()
     {
         int num = 0;
@@ -52,11 +56,10 @@ public class ChessBoard
     }
     
     /**
-     * Checks if a piece is at the specified location
+     * Gets the piece at the specified location
      *
-     * @param row   row of the location
-     * @param col   column of the location
-     * @return      true if the piece is at specified location, otherwise false
+     * @param location          location to get the piece from
+     * @return                  ChessPiece at the specified location
      */
     public ChessPiece getPieceAt(ChessLocation location)
     {

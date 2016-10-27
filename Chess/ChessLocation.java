@@ -3,7 +3,7 @@
  * This class holds and sets the location of the pieces
  * 
  * @author An Huynh
- * @version version 1.0 (2016.10.09)
+ * @version 2016.11.06
  */
 public class ChessLocation
 {
@@ -22,26 +22,30 @@ public class ChessLocation
         this.col = col;
     }
 
+    /**
+     *
+     * @return                  row integer
+     */
     public int getRow()
     {
         return row;
     }
-    
+
+    /**
+     *
+     * @return                  col integer
+     */
     public int getCol()
     {
         return col;
     }
-    
-    public void setRow()
-    {
-        this.row = row;
-    }
-    
-    public void setCol()
-    {
-        this.col = col;
-    }
 
+    /**
+     * Compares another ChessLocation to see if they are equal
+     *
+     * @param checkLocation         row location
+     * @return                      true if locations are equal, otherwise false
+     */
     public boolean equals(ChessLocation checkLocation)
     {
         if (row == checkLocation.row && col == checkLocation.col)
