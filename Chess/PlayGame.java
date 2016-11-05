@@ -18,7 +18,7 @@ public class PlayGame
         Scanner reader = new Scanner(System.in);
         ChessGame game = new ChessGame("p1", "p2");
         
-        System.out.println("\nMove the knight around the chess board!");
+        System.out.println("\nMove the pieces around the chess board!");
         
         boolean finished = false;
         while (!finished)

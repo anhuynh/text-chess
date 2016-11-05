@@ -10,22 +10,22 @@ public class ChessGame
     private ChessBoard board;
     private String player1;
     private String player2;
-    private Knight knight1;
-    private Knight knight2;
-    private Pawn pawn1;
-    private Pawn pawn2;
-    private Pawn pawn3;
-    private Pawn pawn4;
-    private Pawn pawn5;
-    private Pawn pawn6;
-    private Pawn pawn7;
-    private Pawn pawn8;
-    private Rook rook1;
-    private Rook rook2;
-    private Bishop bishop1;
-    private Bishop bishop2;
-    private King king;
-    private Queen queen;
+    private ChessPiece knight1;
+    private ChessPiece knight2;
+    private ChessPiece pawn1;
+    private ChessPiece pawn2;
+    private ChessPiece pawn3;
+    private ChessPiece pawn4;
+    private ChessPiece pawn5;
+    private ChessPiece pawn6;
+    private ChessPiece pawn7;
+    private ChessPiece pawn8;
+    private ChessPiece rook1;
+    private ChessPiece rook2;
+    private ChessPiece bishop1;
+    private ChessPiece bishop2;
+    private ChessPiece king;
+    private ChessPiece queen;
 
     /**
      * Constructor for objects of class ChessGame. Creates a new chess board and initializes

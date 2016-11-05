@@ -48,11 +48,13 @@ public class ChessLocation
      */
     public boolean equals(ChessLocation checkLocation)
     {
-        if (row == checkLocation.row && col == checkLocation.col)
+        if (this == checkLocation)
         {
             return true;
-        }
+        } else if (checkLocation == null) {
+            return false;
+        } 
 
-        return false;
+        return (row == checkLocation.row && col == checkLocation.col);
     }
 }
