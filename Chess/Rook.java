@@ -92,11 +92,6 @@ public class Rook extends ChessPiece
                 }
             }
         }
-
-        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
-        {
-            return false;
-        }
         return true;
     }
 }

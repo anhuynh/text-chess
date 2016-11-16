@@ -55,10 +55,6 @@ public class Knight extends ChessPiece
      */
     protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
     {
-        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
-        {
-            return false;
-        }
         return true;
     }
 }

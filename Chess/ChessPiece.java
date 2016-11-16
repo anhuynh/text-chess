@@ -5,7 +5,7 @@
  * @author An Huynh
  * @version 2016.11.06
  */
-public abstract class ChessPiece
+public abstract class ChessPiece implements ChessPieceInterface
 {
     private ChessGame game; // determine which game this piece belongs to
     private String player;  // owner of the piece
@@ -35,7 +35,7 @@ public abstract class ChessPiece
      */
     public boolean moveTo(ChessLocation newLocation)
     {
-        if (legalMove(newLocation) && checkLineOfSight(location, newLocation))
+        if (legalMove(newLocation) && checkLineOfSight(location, newLocation) && checkEnd(newLocation))
         {
             getGame().getChessBoard().removePiece(location);   // removes the piece from the old location
             getGame().getChessBoard().placePieceAt(this, newLocation);  // places the piece at the new location
@@ -55,6 +55,14 @@ public abstract class ChessPiece
         }
     }
 
+    private boolean checkEnd(ChessLocation end)
+    {
+        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
+        {
+            return false;
+        }
+        return true;
+    }
     /** Each subclass has it's own algorithm of checking line of sight */
     protected abstract boolean checkLineOfSight(ChessLocation start, ChessLocation end);
 
