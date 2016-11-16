@@ -66,8 +66,10 @@ public class PlayGame
                         ChessLocation destLocation = parseCommand(inp); // attempt to parse the input for a location
                         if (destLocation != null) 
                         {
-                            sourcePiece.moveTo(destLocation); // move the piece if it is a legal move
-                            p1Turn = !p1Turn;
+                            if(sourcePiece.moveTo(destLocation))    // move the piece if it is a legal move
+                            {
+                                p1Turn = !p1Turn;
+                            }
                         }
                     } else
                     {
