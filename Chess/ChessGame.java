@@ -10,22 +10,12 @@ public class ChessGame
     private ChessBoard board;
     private String player1;
     private String player2;
-    private ChessPiece knight1;
-    private ChessPiece knight2;
-    private ChessPiece pawn1;
-    private ChessPiece pawn2;
-    private ChessPiece pawn3;
-    private ChessPiece pawn4;
-    private ChessPiece pawn5;
-    private ChessPiece pawn6;
-    private ChessPiece pawn7;
-    private ChessPiece pawn8;
-    private ChessPiece rook1;
-    private ChessPiece rook2;
-    private ChessPiece bishop1;
-    private ChessPiece bishop2;
-    private ChessPiece king;
-    private ChessPiece queen;
+    private ChessPiece knight1, knight2, knight3, knight4;
+    private ChessPiece pawn1, pawn2,  pawn3, pawn4, pawn5, pawn6, pawn7, pawn8, pawn9, pawn10, pawn11, pawn12, pawn13, pawn14, pawn15, pawn16;
+    private ChessPiece rook1, rook2, rook3, rook4;
+    private ChessPiece bishop1, bishop2, bishop3, bishop4;
+    private ChessPiece king1, king2;
+    private ChessPiece queen1, queen2;
 
     /**
      * Constructor for objects of class ChessGame. Creates a new chess board and initializes
@@ -40,7 +30,14 @@ public class ChessGame
         this.player2 = player2;
 
         board = new ChessBoard();
+
         // initialize all pieces to the proper locations
+        initializePieces();
+    }
+
+    private void initializePieces()
+    {
+        // player 1 pieces
         knight1 = new Knight(player1, new ChessLocation(0,1), this);
         knight2 = new Knight(player1, new ChessLocation(0,6), this);
         pawn1 = new Pawn(player1, new ChessLocation(1,0), this);
@@ -55,8 +52,25 @@ public class ChessGame
         rook2 = new Rook(player1, new ChessLocation(0,7), this);
         bishop1 = new Bishop(player1, new ChessLocation(0,2), this);
         bishop2 = new Bishop(player1, new ChessLocation(0,5), this);
-        king = new King(player1, new ChessLocation(0,4), this);
-        queen = new Queen(player1, new ChessLocation(0,3), this);
+        king1 = new King(player1, new ChessLocation(0,4), this);
+        queen2 = new Queen(player1, new ChessLocation(0,3), this);
+        // player 2
+        knight3 = new Knight(player2, new ChessLocation(7,1), this);
+        knight4 = new Knight(player2, new ChessLocation(7,6), this);
+        pawn9 = new Pawn(player2, new ChessLocation(6,0), this);
+        pawn10 = new Pawn(player2, new ChessLocation(6,1), this);
+        pawn11 = new Pawn(player2, new ChessLocation(6,2), this);
+        pawn12 = new Pawn(player2, new ChessLocation(6,3), this);
+        pawn13 = new Pawn(player2, new ChessLocation(6,4), this);
+        pawn14 = new Pawn(player2, new ChessLocation(6,5), this);
+        pawn15 = new Pawn(player2, new ChessLocation(6,6), this);
+        pawn16 = new Pawn(player2, new ChessLocation(6,7), this);
+        rook3 = new Rook(player2, new ChessLocation(7,0), this);
+        rook4 = new Rook(player2, new ChessLocation(7,7), this);
+        bishop3 = new Bishop(player2, new ChessLocation(7,2), this);
+        bishop4 = new Bishop(player2, new ChessLocation(7,5), this);
+        king2 = new King(player2, new ChessLocation(7,4), this);
+        queen2 = new Queen(player2, new ChessLocation(7,3), this);
     }
     
     /**
