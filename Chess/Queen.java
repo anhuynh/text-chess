@@ -60,7 +60,7 @@ public class Queen extends ChessPiece
     {
         if (end.getRow() == start.getRow() && start.getCol() < end.getCol()) // if move to the right
         {
-            for (int i = start.getCol() + 1; i <= end.getCol(); i++) 
+            for (int i = start.getCol() + 1; i <= end.getCol() - 1; i++) 
             {
                 if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
                 {
@@ -69,7 +69,7 @@ public class Queen extends ChessPiece
             }
         } else if (end.getRow() == start.getRow() && start.getCol() > end.getCol()) // if move to the left
         {
-            for (int i = start.getCol() - 1; i >= end.getCol(); i--) 
+            for (int i = start.getCol() - 1; i >= end.getCol() + 1; i--) 
             {
                 if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
                 {
@@ -78,7 +78,7 @@ public class Queen extends ChessPiece
             }
         } else if (end.getCol() == start.getCol() && start.getRow() < end.getRow()) // if move down
         {
-            for (int i = start.getRow() + 1; i <= end.getRow(); i++) 
+            for (int i = start.getRow() + 1; i <= end.getRow() - 1; i++) 
             {
                 if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
                 {
@@ -87,7 +87,7 @@ public class Queen extends ChessPiece
             }
         } else if (end.getCol() == start.getCol() && start.getRow() > end.getRow()) // if move up
         {
-            for (int i = start.getRow() - 1; i >= end.getRow(); i--) 
+            for (int i = start.getRow() - 1; i >= end.getRow() + 1; i--) 
             {
                 if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
                 {
@@ -96,7 +96,7 @@ public class Queen extends ChessPiece
             }
         } else if (start.getRow() - end.getRow() > 0 && start.getCol() - end.getCol() > 0) // if move is up left
         {
-            for (int row = start.getRow() - 1, col = start.getCol() - 1; row >= end.getRow(); row--, col--)
+            for (int row = start.getRow() - 1, col = start.getCol() - 1; row >= end.getRow() + 1; row--, col--)
             {
                 if (getGame().getChessBoard().isPieceAt(row, col))
                 {
@@ -105,7 +105,7 @@ public class Queen extends ChessPiece
             }
         } else if (start.getRow() - end.getRow() > 0 && start.getCol() - end.getCol() < 0) // if move is up right
         {
-            for (int row = start.getRow() - 1, col = start.getCol() + 1; row >= end.getRow(); row--, col++)
+            for (int row = start.getRow() - 1, col = start.getCol() + 1; row >= end.getRow() + 1; row--, col++)
             {
                 if (getGame().getChessBoard().isPieceAt(row, col))
                 {
@@ -114,7 +114,7 @@ public class Queen extends ChessPiece
             }
         } else if (start.getRow() - end.getRow() < 0 && start.getCol() - end.getCol() > 0) // if move is down left
         {
-            for (int row = start.getRow() + 1, col = start.getCol() - 1; row <= end.getRow(); row++, col--)
+            for (int row = start.getRow() + 1, col = start.getCol() - 1; row <= end.getRow() - 1; row++, col--)
             {
                 if (getGame().getChessBoard().isPieceAt(row, col))
                 {
@@ -123,13 +123,18 @@ public class Queen extends ChessPiece
             }
         } else if (start.getRow() - end.getRow() < 0 && start.getCol() - end.getCol() < 0) // if move is down left
         {
-            for (int row = start.getRow() + 1, col = start.getCol() + 1; row <= end.getRow(); row++, col++)
+            for (int row = start.getRow() + 1, col = start.getCol() + 1; row <= end.getRow() - 1; row++, col++)
             {
                 if (getGame().getChessBoard().isPieceAt(row, col))
                 {
                     return false;
                 }
             }
+        }
+
+        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
+        {
+            return false;
         }
         return true;
     }

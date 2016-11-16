@@ -57,7 +57,7 @@ public class Rook extends ChessPiece
     {
         if (end.getRow() == start.getRow() && start.getCol() < end.getCol()) // if move to the right
         {
-            for (int i = start.getCol() + 1; i <= end.getCol(); i++) 
+            for (int i = start.getCol() + 1; i <= end.getCol() - 1; i++) 
             {
                 if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
                 {
@@ -66,7 +66,7 @@ public class Rook extends ChessPiece
             }
         } else if (end.getRow() == start.getRow() && start.getCol() > end.getCol()) // if move to the left
         {
-            for (int i = start.getCol() - 1; i >= end.getCol(); i--) 
+            for (int i = start.getCol() - 1; i >= end.getCol() + 1; i--) 
             {
                 if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
                 {
@@ -75,7 +75,7 @@ public class Rook extends ChessPiece
             }
         } else if (end.getCol() == start.getCol() && start.getRow() < end.getRow()) // if move down
         {
-            for (int i = start.getRow() + 1; i <= end.getRow(); i++) 
+            for (int i = start.getRow() + 1; i <= end.getRow() - 1; i++) 
             {
                 if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
                 {
@@ -84,13 +84,18 @@ public class Rook extends ChessPiece
             }
         } else if (end.getCol() == start.getCol() && start.getRow() > end.getRow()) // if move up
         {
-            for (int i = start.getRow() - 1; i >= end.getRow(); i--) 
+            for (int i = start.getRow() - 1; i >= end.getRow() + 1; i--) 
             {
                 if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
                 {
                     return false;
                 }
             }
+        }
+
+        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
+        {
+            return false;
         }
         return true;
     }

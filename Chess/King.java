@@ -58,7 +58,7 @@ public class King extends ChessPiece
      */
     protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
     {
-        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol())) 
+        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
         {
             return false;
         }
