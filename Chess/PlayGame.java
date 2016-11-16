@@ -29,6 +29,7 @@ public class PlayGame
             {
                 game = new ChessGame(p1, p2);
                 System.out.println("\nA new game of chess has started!");
+                p1Turn = true;
                 restart = false;
             }
 

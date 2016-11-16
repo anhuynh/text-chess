@@ -50,6 +50,9 @@ public class Pawn extends ChessPiece
             } else if (newLocation.getRow() - location.getRow() == 1 && newLocation.getCol() == location.getCol())
             {
                 return true;
+            } else if (newLocation.getRow() - location.getRow() == 1 && Math.abs(newLocation.getCol() - location.getCol()) == 1 && getGame().getChessBoard().isPieceAt(newLocation.getRow(), newLocation.getCol()) && getGame().getChessBoard().getPieceAt(newLocation).getOwner() != this.getOwner())
+            {
+                return true;
             }
         } else
         {
@@ -61,6 +64,9 @@ public class Pawn extends ChessPiece
                 }
                 return true;
             } else if (location.getRow() - newLocation.getRow() == 1 && location.getCol() == newLocation.getCol())
+            {
+                return true;
+            } else if (location.getRow() - newLocation.getRow() == 1 && Math.abs(newLocation.getCol() - location.getCol()) == 1 && getGame().getChessBoard().isPieceAt(newLocation.getRow(), newLocation.getCol()) && getGame().getChessBoard().getPieceAt(newLocation).getOwner() != this.getOwner())
             {
                 return true;
             }
@@ -82,7 +88,7 @@ public class Pawn extends ChessPiece
             if (end.getRow() - start.getRow() == 2 && (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) || getGame().getChessBoard().isPieceAt(start.getRow() + 1, start.getCol())))
             {
                 return false;
-            } else if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))
+            } else if (end.getRow() - start.getRow() == 1 && end.getCol() == start.getCol() && getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))
             {
                 return false;
             }
@@ -91,7 +97,7 @@ public class Pawn extends ChessPiece
             if (start.getRow() - end.getRow() == 2 && (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) || getGame().getChessBoard().isPieceAt(start.getRow() - 1, start.getCol())))
             {
                 return false;
-            } else if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))
+            } else if (start.getRow() - end.getRow() == 1 && end.getCol() == start.getCol() && getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()))
             {
                 return false;
             }
