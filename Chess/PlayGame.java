@@ -17,25 +17,28 @@ public class PlayGame
     public static void main (String[] args)
     {
         Scanner reader = new Scanner(System.in);
-
+        String currentPlayer;
+        String p1 = "Player 1";
+        String p2 = "Player 2";
+        boolean p1Turn = true;      // keeps track of whose turn it is; true for player 1, false for player 2
         boolean finished = false;
         boolean restart = true;
         while (!finished)
         {
             if (restart)
             {
-                game = new ChessGame("p1", "p2");
+                game = new ChessGame(p1, p2);
                 System.out.println("\nA new game of chess has started!");
                 restart = false;
             }
 
-            System.out.println("\nHere is the current board:\n");
+            currentPlayer = (p1Turn) ? p1 : p2;
+            System.out.println("\n" + currentPlayer + ", it is your turn.\nHere is the current board:\n");
             System.out.println(game.getChessBoard().toString());
-
             System.out.println("Enter a location (row,col e.g. \"0,2\") of the piece to move, enter \"r\" to restart the game or enter \"q\" to quit.");
             System.out.print(">> ");
             String inp = reader.nextLine(); // takes in the user's input
-            
+
             if (inp.equalsIgnoreCase("q")) // if user inputs "q", the game will finish
             {
                 System.out.println("\nSee you next time!");
@@ -54,14 +57,21 @@ public class PlayGame
                 if (game.getChessBoard().isPieceAt(sourceLocation.getRow(), sourceLocation.getCol())) // checks to see if there is a piece at the source location
                 {
                     ChessPiece sourcePiece = game.getChessBoard().getPieceAt(sourceLocation);
-                    System.out.println("\nYou have selected " + sourcePiece.toString() + " at location " + sourcePiece.locationString() + ". Enter a location to move to");
-                    System.out.print(">> ");
-                    inp = reader.nextLine(); // takes in the user's input
-
-                    ChessLocation destLocation = parseCommand(inp); // attempt to parse the input for a location
-                    if (destLocation != null) 
+                    if (sourcePiece.getOwner().equals(currentPlayer))
                     {
-                        sourcePiece.moveTo(destLocation); // move the piece if it is a legal move
+                        System.out.println("\nYou have selected " + sourcePiece.toString() + " at location " + sourcePiece.locationString() + ". Enter a location to move to");
+                        System.out.print(">> ");
+                        inp = reader.nextLine(); // takes in the user's input
+
+                        ChessLocation destLocation = parseCommand(inp); // attempt to parse the input for a location
+                        if (destLocation != null) 
+                        {
+                            sourcePiece.moveTo(destLocation); // move the piece if it is a legal move
+                            p1Turn = !p1Turn;
+                        }
+                    } else
+                    {
+                        System.out.println("\nThat piece is not yours! Please try again.");
                     }
                 } else
                 {
