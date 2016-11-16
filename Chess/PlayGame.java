@@ -8,6 +8,7 @@ import java.util.Scanner;
  */
 public class PlayGame
 {
+    private static ChessGame game;
     /**
      * Starts a new game.
      *
@@ -16,24 +17,34 @@ public class PlayGame
     public static void main (String[] args)
     {
         Scanner reader = new Scanner(System.in);
-        ChessGame game = new ChessGame("p1", "p2");
-        
-        System.out.println("\nMove the pieces around the chess board!");
-        
+
         boolean finished = false;
+        boolean restart = true;
         while (!finished)
         {
+            if (restart)
+            {
+                game = new ChessGame("p1", "p2");
+                System.out.println("\nA new game of chess has started!");
+                restart = false;
+            }
+
             System.out.println("\nHere is the current board:\n");
             System.out.println(game.getChessBoard().toString());
 
-            System.out.println("Enter a location (row,col e.g. \"0,2\") of the piece to move or enter \"q\" to quit");
+            System.out.println("Enter a location (row,col e.g. \"0,2\") of the piece to move, enter \"r\" to restart the game or enter \"q\" to quit.");
             System.out.print(">> ");
             String inp = reader.nextLine(); // takes in the user's input
             
-            if (inp.equals("q")) // if user inputs "q", the game will finish
+            if (inp.equalsIgnoreCase("q")) // if user inputs "q", the game will finish
             {
                 System.out.println("\nSee you next time!");
                 finished = true;
+                continue;
+            }
+            if (inp.equalsIgnoreCase("r"))
+            {
+                restart = true;
                 continue;
             }
             
