@@ -64,4 +64,9 @@ public class King extends ChessPiece
         }
         return true;
     }
+
+    protected void updateThreateningLocation(ChessLocation newLocation)
+    {
+        
+    }
 }

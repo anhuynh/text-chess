@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Superclass for chess pieces
@@ -11,6 +12,7 @@ public abstract class ChessPiece implements ChessPieceInterface
     private String player;  // owner of the piece
     protected ChessLocation location; // current location of the piece
     protected char id; // identifies the type of chess piece
+    private ArrayList<ChessLocation> threateningLocations;
 
     /**
      * Constructor for chess pieces. Places the piece on the chess board
@@ -24,6 +26,7 @@ public abstract class ChessPiece implements ChessPieceInterface
         this.game = game;
         player = owner;
         location = initialLocation;
+        threateningLocations = new ArrayList<>();
 
         game.getChessBoard().placePieceAt(this, initialLocation); // place piece on board at initialLocation
     }
@@ -40,6 +43,8 @@ public abstract class ChessPiece implements ChessPieceInterface
             getGame().getChessBoard().removePiece(location);   // removes the piece from the old location
             getGame().getChessBoard().placePieceAt(this, newLocation);  // places the piece at the new location
             location = newLocation;
+            updateThreateningLocation(newLocation);
+            printList();
             return true;
         } else
         {
@@ -55,7 +60,7 @@ public abstract class ChessPiece implements ChessPieceInterface
         }
     }
 
-    private boolean checkEnd(ChessLocation end)
+    protected boolean checkEnd(ChessLocation end)
     {
         if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
         {
@@ -63,12 +68,27 @@ public abstract class ChessPiece implements ChessPieceInterface
         }
         return true;
     }
+
+    public ArrayList<ChessLocation> getThreateningLocations()
+    {
+        return threateningLocations;
+    }
+
+    protected abstract void updateThreateningLocation(ChessLocation newLocation);
+
     /** Each subclass has it's own algorithm of checking line of sight */
     protected abstract boolean checkLineOfSight(ChessLocation start, ChessLocation end);
 
     /** Each subclass has it's own algorithm for checking legality */
     protected abstract boolean legalMove(ChessLocation newLocation);
 
+    public void printList()
+    {
+        for (ChessLocation location : threateningLocations) 
+        {
+            System.out.println(location.getRow() + "," + location.getCol());
+        }
+    }
     /**
     *
      * @return                  string that contains current location of the piece
@@ -94,6 +114,11 @@ public abstract class ChessPiece implements ChessPieceInterface
     public ChessLocation getLocation()
     {
         return location;
+    }
+
+    public void setLocation(ChessLocation newLocation)
+    {
+        location = newLocation;
     }
 
     /**

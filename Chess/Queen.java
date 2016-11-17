@@ -133,4 +133,20 @@ public class Queen extends ChessPiece
         }
         return true;
     }
+
+    protected void updateThreateningLocation(ChessLocation newLocation)
+    {
+        getThreateningLocations().clear();
+        for (int row = 0; row < 8; row++)
+        {
+            for (int col = 0; col < 8; col++)
+            {
+                ChessLocation checkLocation = new ChessLocation(row, col);
+                if (legalMove(checkLocation) && checkLineOfSight(newLocation, checkLocation) && checkEnd(checkLocation))
+                {
+                    getThreateningLocations().add(checkLocation);
+                }
+            }
+        }
+    }
 }
