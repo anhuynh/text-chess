@@ -43,8 +43,6 @@ public abstract class ChessPiece implements ChessPieceInterface
             getGame().getChessBoard().removePiece(location);   // removes the piece from the old location
             getGame().getChessBoard().placePieceAt(this, newLocation);  // places the piece at the new location
             location = newLocation;
-            updateThreateningLocation(newLocation);
-            printList();
             return true;
         } else
         {

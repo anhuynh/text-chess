@@ -52,7 +52,7 @@ public class ChessGame
         rook2 = new Rook(player1, new ChessLocation(0,7), this);
         bishop1 = new Bishop(player1, new ChessLocation(0,2), this);
         bishop2 = new Bishop(player1, new ChessLocation(0,5), this);
-        king1 = new King(player1, new ChessLocation(0,4), this);
+        king1 = new King(player1, new ChessLocation(4,4), this);
         queen2 = new Queen(player1, new ChessLocation(0,3), this);
         // player 2
         knight3 = new Knight(player2, new ChessLocation(7,1), this);
