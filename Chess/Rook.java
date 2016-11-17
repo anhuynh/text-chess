@@ -46,55 +46,6 @@ public class Rook extends ChessPiece
         return false;
     }
 
-    /**
-     * Checks in between the start and end locations for a piece that blocks the move.
-     *
-     * @param start             starting location to check
-     * @param end               end location to check
-     * @return                  true if there is no piece blocking the move, otherwise false
-     */
-    protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
-    {
-        if (end.getRow() == start.getRow() && start.getCol() < end.getCol()) // if move to the right
-        {
-            for (int i = start.getCol() + 1; i <= end.getCol() - 1; i++) 
-            {
-                if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
-                {
-                    return false;
-                }
-            }
-        } else if (end.getRow() == start.getRow() && start.getCol() > end.getCol()) // if move to the left
-        {
-            for (int i = start.getCol() - 1; i >= end.getCol() + 1; i--) 
-            {
-                if (getGame().getChessBoard().isPieceAt(start.getRow(), i))
-                {
-                    return false;
-                }
-            }
-        } else if (end.getCol() == start.getCol() && start.getRow() < end.getRow()) // if move down
-        {
-            for (int i = start.getRow() + 1; i <= end.getRow() - 1; i++) 
-            {
-                if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
-                {
-                    return false;
-                }
-            }
-        } else if (end.getCol() == start.getCol() && start.getRow() > end.getRow()) // if move up
-        {
-            for (int i = start.getRow() - 1; i >= end.getRow() + 1; i--) 
-            {
-                if (getGame().getChessBoard().isPieceAt(i, start.getCol()))
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     protected void updateThreateningLocation(ChessLocation newLocation)
     {
         getThreateningLocations().clear();

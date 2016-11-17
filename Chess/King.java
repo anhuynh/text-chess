@@ -36,37 +36,28 @@ public class King extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if ((Math.abs(newLocation.getRow() - location.getRow()) == 1) && newLocation.getCol() == location.getCol())
-        {
-            return true;
-        } else if ((Math.abs(newLocation.getCol() - location.getCol()) == 1) && newLocation.getRow() == location.getRow())
-        {
-            return true;
-        } else if (Math.abs(newLocation.getRow() - location.getRow()) == 1 && Math.abs(newLocation.getCol() - location.getCol()) == 1)
+        if ((Math.abs(newLocation.getRow() - location.getRow()) == 1) && newLocation.getCol() == location.getCol()
+            || ((Math.abs(newLocation.getCol() - location.getCol()) == 1) && newLocation.getRow() == location.getRow())
+            || (Math.abs(newLocation.getRow() - location.getRow()) == 1 && Math.abs(newLocation.getCol() - location.getCol()) == 1))
         {
             return true;
         }
         return false;
     }
 
-    /**
-     * Checks for a piece at the end location
-     *
-     * @param start             starting location to check
-     * @param end               end location to check
-     * @return                  true if there is no piece blocking the move, otherwise false
-     */
-    protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
-    {
-        if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
-        {
-            return false;
-        }
-        return true;
-    }
-
     protected void updateThreateningLocation(ChessLocation newLocation)
     {
-        
+        getThreateningLocations().clear();
+        for (int row = 0; row < 8; row++)
+        {
+            for (int col = 0; col < 8; col++)
+            {
+                ChessLocation checkLocation = new ChessLocation(row, col);
+                if (legalMove(checkLocation) && checkEnd(checkLocation))
+                {
+                    getThreateningLocations().add(checkLocation);
+                }
+            }
+        }
     }
 }

@@ -52,6 +52,7 @@ public class Pawn extends ChessPiece
                 return true;
             } else if (newLocation.getRow() - location.getRow() == 1 && Math.abs(newLocation.getCol() - location.getCol()) == 1 && getGame().getChessBoard().isPieceAt(newLocation.getRow(), newLocation.getCol()) && getGame().getChessBoard().getPieceAt(newLocation).getOwner() != this.getOwner())
             {
+                firstMove = false;
                 return true;
             }
         } else
@@ -68,6 +69,7 @@ public class Pawn extends ChessPiece
                 return true;
             } else if (location.getRow() - newLocation.getRow() == 1 && Math.abs(newLocation.getCol() - location.getCol()) == 1 && getGame().getChessBoard().isPieceAt(newLocation.getRow(), newLocation.getCol()) && getGame().getChessBoard().getPieceAt(newLocation).getOwner() != this.getOwner())
             {
+                firstMove = false;
                 return true;
             }
         }
@@ -107,6 +109,48 @@ public class Pawn extends ChessPiece
 
     protected void updateThreateningLocation(ChessLocation newLocation)
     {
-        
+        getThreateningLocations().clear();
+        if (getOwner().equals(getGame().getP1())) // forward direction depends on player
+        {
+            ChessLocation right = new ChessLocation(newLocation.getRow() + 1, newLocation.getCol() + 1);
+            ChessLocation left = new ChessLocation(newLocation.getRow() + 1, newLocation.getCol() - 1);
+            if (newLocation.getCol() == 0)
+            {
+                addPiece(right);
+            } else if (newLocation.getCol() == 7)
+            {
+                addPiece(left);
+            } else
+            {
+                addPiece(right);
+                addPiece(left);
+            }
+        } else
+        {
+            ChessLocation right = new ChessLocation(newLocation.getRow() - 1, newLocation.getCol() + 1);
+            ChessLocation left = new ChessLocation(newLocation.getRow() - 1, newLocation.getCol() - 1);
+            if (newLocation.getCol() == 0)
+            {
+                addPiece(right);
+            } else if (newLocation.getCol() == 7)
+            {
+                addPiece(left);
+            } else
+            {
+                addPiece(right);
+                addPiece(left);
+            }
+        }
+    }
+
+    private void addPiece(ChessLocation location)
+    {
+        if (!getGame().getChessBoard().isPieceAt(location.getRow(), location.getCol()))
+        {
+            getThreateningLocations().add(location);
+        } else if (getGame().getChessBoard().getPieceAt(location).getOwner() != this.getOwner())
+        {
+            getThreateningLocations().add(location);
+        }
     }
 }
