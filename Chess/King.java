@@ -64,6 +64,33 @@ public class King extends ChessPiece
         return null;
     }
 
+    public boolean anyMovesLeft()
+    {
+        for (int row = 0; row < 8; row++)
+        {
+            for (int col = 0; col < 8; col++)
+            {
+                ChessLocation location = new ChessLocation(row, col);
+                if (locationInDanger(location) == null && legalMove(location))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public ChessPiece check()
+    {
+        ChessPiece piece = locationInDanger(location);
+        if (piece != null)
+        {
+            return piece;
+        }
+        return null;
+    }
+
     /**
      * Checks if the new location is a legal move. Legal if move is one space in any
      * direction

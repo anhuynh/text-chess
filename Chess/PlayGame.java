@@ -34,8 +34,17 @@ public class PlayGame
             }
 
             currentPlayer = (p1Turn) ? p1 : p2;
+
             System.out.println("\n" + currentPlayer + ", it is your turn.\nHere is the current board:\n");
             System.out.println(game.getChessBoard().toString());
+
+            if (checkOrCheckMate(game, currentPlayer))
+            {
+                System.out.println("Checkmate! Game over.");
+                finished = true;
+                continue;
+            }
+
             System.out.println("Enter a location (row,col e.g. \"0,2\") of the piece to move, enter \"r\" to restart the game or enter \"q\" to quit.");
             System.out.print(">> ");
             String inp = reader.nextLine(); // takes in the user's input
@@ -112,6 +121,23 @@ public class PlayGame
         {
             System.out.println("\nI don't know what happened. You did something bad :(\n");
             return null;
+        }
+    }
+
+    private static boolean checkOrCheckMate(ChessGame game, String currentPlayer)
+    {
+        King king = game.getKing(currentPlayer);
+        ChessPiece piece = king.check();
+        if (!game.getChessBoard().anyPiecesLeft(king) && !king.anyMovesLeft())
+        {
+            return true;
+        } else
+        {
+            if (piece != null)
+            {
+                System.out.println("\nCheck! Threatened by " + piece.toString());
+            }
+            return false;
         }
     }
 }

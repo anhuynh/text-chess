@@ -104,4 +104,19 @@ public class ChessBoard
     {
         board[location.getRow()][location.getCol()] = null;
     }
+
+    public boolean anyPiecesLeft(ChessPiece king)
+    {
+        for (ChessPiece[] rows : board)
+        {
+            for (ChessPiece piece : rows)
+            {
+                if (piece != null && piece.getOwner().equals(king.getOwner()) && piece != king)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
