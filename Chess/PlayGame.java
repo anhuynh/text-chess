@@ -4,7 +4,7 @@ import java.util.Scanner;
  * Handles the game loop
  * 
  * @author An Huynh
- * @version 2016.11.06
+ * @version 2016.11.27
  */
 public class PlayGame
 {
@@ -17,7 +17,7 @@ public class PlayGame
     public static void main (String[] args)
     {
         Scanner reader = new Scanner(System.in);
-        String currentPlayer;
+        String currentPlayer;   //  keeps track of current player
         String p1 = "Player 1";
         String p2 = "Player 2";
         boolean p1Turn = true;      // keeps track of whose turn it is; true for player 1, false for player 2
@@ -33,12 +33,12 @@ public class PlayGame
                 restart = false;
             }
 
-            currentPlayer = (p1Turn) ? p1 : p2;
+            currentPlayer = (p1Turn) ? p1 : p2; // sets current player depending on value of p1Turn
 
             System.out.println("\n" + currentPlayer + ", it is your turn.\nHere is the current board:\n");
             System.out.println(game.getChessBoard().toString());
 
-            if (checkOrCheckMate(game, currentPlayer))
+            if (checkOrCheckMate(currentPlayer))  // checks current player's king for check or checkmate
             {
                 System.out.println("Checkmate! Game over.");
                 finished = true;
@@ -55,7 +55,7 @@ public class PlayGame
                 finished = true;
                 continue;
             }
-            if (inp.equalsIgnoreCase("r"))
+            if (inp.equalsIgnoreCase("r")) // if user inputs "r", the game will restart
             {
                 restart = true;
                 continue;
@@ -78,7 +78,7 @@ public class PlayGame
                         {
                             if(sourcePiece.moveTo(destLocation))    // move the piece if it is a legal move
                             {
-                                p1Turn = !p1Turn;
+                                p1Turn = !p1Turn; // switch player turns
                             }
                         }
                     } else
@@ -94,7 +94,7 @@ public class PlayGame
     }
 
     /**
-     * Attempts to parse the input string for a location
+     * Attempts to parse the input string for a location.
      *
      * @param input             input string to parse location
      * @return                  ChessLocation containing the parsed location, returns null if input location is out of bounds or parsing fails
@@ -124,11 +124,17 @@ public class PlayGame
         }
     }
 
-    private static boolean checkOrCheckMate(ChessGame game, String currentPlayer)
+    /**
+     * Checks for check or checkmate.
+     *
+     * @param currentPlayer     string of current player
+     * @return                  true if checkmate, otherwise false
+     */
+    private static boolean checkOrCheckMate(String currentPlayer)
     {
         King king = game.getKing(currentPlayer);
         ChessPiece piece = king.check();
-        if (!game.getChessBoard().anyPiecesLeft(king) && !king.anyMovesLeft())
+        if (!game.getChessBoard().anyPiecesLeft(king) && !king.anyMovesLeft() && piece != null) //  conditions for a checkmate
         {
             return true;
         } else

@@ -3,7 +3,7 @@
  * This class holds and sets the location of the pieces
  * 
  * @author An Huynh
- * @version 2016.11.06
+ * @version 2016.11.27
  */
 public class ChessLocation
 {

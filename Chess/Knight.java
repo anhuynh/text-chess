@@ -3,12 +3,12 @@
  * A knight piece that can be moved and checks the legality of the move
  * 
  * @author An Huynh
- * @version 2016.11.06
+ * @version 2016.11.27
  */
 public class Knight extends ChessPiece
 {
     /**
-     * Constructor for objects of class Knight. Places the knight on the chess board
+     * Constructor for objects of class Knight. Places the knight on the chess board.
      *
      * @param owner             owner to which the piece belongs to
      * @param initialLocation   starting location of the knight
@@ -28,11 +28,8 @@ public class Knight extends ChessPiece
     }
 
     /**
-     * Checks if the new location is a legal move. Legal if row is +/- 2 and col is +/- 1
-     * or row is +/- 1 and col is +/- 2
-     *
-     * @param newLocation  	    new location to check the legality of
-     * @return                  true if the move is legal, otherwise false
+     * {@inheritDoc}
+     * Legal if row is +/- 2 and col is +/- 1 or row is +/- 1 and col is +/- 2.
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
@@ -46,18 +43,15 @@ public class Knight extends ChessPiece
         return false;
     }
 
-    /**
-     * Checks for a piece at the end location
-     *
-     * @param start             starting location to check
-     * @param end               end location to check
-     * @return                  true if there is no piece on the end location, otherwise false
-     */
+    @Override
     protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
     {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected void updateThreateningLocation(ChessLocation newLocation)
     {
         getThreateningLocations().clear();

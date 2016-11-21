@@ -19,7 +19,7 @@ public class ChessGame
 
     /**
      * Constructor for objects of class ChessGame. Creates a new chess board and initializes
-     * all pieces to their proper locations
+     * all pieces to their proper locations.
      *
      * @param player1           string of player 1 name
      * @param player2           string of player 2 name
@@ -35,6 +35,9 @@ public class ChessGame
         initializePieces();
     }
 
+    /**
+     * Initialize all pieces to the board.
+     */
     private void initializePieces()
     {
         // player 1 pieces
@@ -54,7 +57,8 @@ public class ChessGame
         bishop2 = new Bishop(player1, new ChessLocation(0,5), this);
         king1 = new King(player1, new ChessLocation(0,4), this);
         queen2 = new Queen(player1, new ChessLocation(0,3), this);
-        // player 2
+
+        // player 2 pieces
         knight3 = new Knight(player2, new ChessLocation(7,1), this);
         knight4 = new Knight(player2, new ChessLocation(7,6), this);
         pawn9 = new Pawn(player2, new ChessLocation(6,0), this);
@@ -73,6 +77,12 @@ public class ChessGame
         queen2 = new Queen(player2, new ChessLocation(7,3), this);
     }
 
+    /**
+     * Gets the player's king.
+     *
+     * @param owner             the owner of the king to get
+     * @return                  the owner's king
+     */
     public King getKing(String owner)
     {
         if (owner.equals(player1))

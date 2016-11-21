@@ -4,14 +4,14 @@
  * a chess board.
  * 
  * @author An Huynh
- * @version 2016.11.06
+ * @version 2016.11.27
  */
 public class ChessBoard
 {
     private ChessPiece[][] board; // board is an array of chess pieces
 
     /**
-     * Constructor for objects of class ChessBoard
+     * Constructor for objects of class ChessBoard.
      */
     public ChessBoard()
     {
@@ -28,7 +28,7 @@ public class ChessBoard
     }
     
     /**
-     * String representation of the board
+     * String representation of the board.
      *
      * @return                  string with board elements
      */
@@ -56,7 +56,7 @@ public class ChessBoard
     }
     
     /**
-     * Gets the piece at the specified location
+     * Gets the piece at the specified location.
      *
      * @param location          location to get the piece from
      * @return                  ChessPiece at the specified location
@@ -67,7 +67,7 @@ public class ChessBoard
     }
 
     /**
-     * Checks if a piece is at the specified location
+     * Checks if a piece is at the specified location.
      * 
      * @param row   row of the location
      * @param col   column of the location
@@ -84,7 +84,7 @@ public class ChessBoard
     }
     
     /**
-     * Places a piece at the specified location
+     * Places a piece at the specified location.
      *
      * @param piece     chess piece to place
      * @param location  new location to place the piece
@@ -96,7 +96,7 @@ public class ChessBoard
     }
     
     /**
-     * Removes a piece at the specified location
+     * Removes a piece at the specified location.
      *
      * @param location  location to remove a piece from
      */
@@ -105,6 +105,12 @@ public class ChessBoard
         board[location.getRow()][location.getCol()] = null;
     }
 
+    /**
+     * Checks if there are any pieces left.
+     *
+     * @param king              king of the current player to check
+     * @return                  true if there are pieces left other than the king, otherwise false
+     */
     public boolean anyPiecesLeft(ChessPiece king)
     {
         for (ChessPiece[] rows : board)

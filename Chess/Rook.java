@@ -3,12 +3,12 @@
  * A rook piece that can be moved and checks the legality of the move
  * 
  * @author An Huynh
- * @version 2016.11.06
+ * @version 2016.11.27
  */
 public class Rook extends ChessPiece
 {
     /**
-     * Constructor for objects of class Rook. Places the rook on the chess board
+     * Constructor for objects of class Rook. Places the rook on the chess board.
      *
      * @param owner             owner to which the piece belongs to
      * @param initialLocation   starting location of the rook
@@ -28,11 +28,8 @@ public class Rook extends ChessPiece
     }
 
     /**
-     * Checks if the new location is a legal move. Legal if move is vertical or horizontal
-     * in any direction
-     *
-     * @param newLocation       new location to check the legality of
-     * @return                  true if the move is legal, otherwise false
+     * {@inheritDoc}
+     * Legal if move is vertical or horizontal in any direction.
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
@@ -46,6 +43,9 @@ public class Rook extends ChessPiece
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected void updateThreateningLocation(ChessLocation newLocation)
     {
         getThreateningLocations().clear();

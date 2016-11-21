@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Superclass for chess pieces
  * 
  * @author An Huynh
- * @version 2016.11.06
+ * @version 2016.11.27
  */
 public abstract class ChessPiece implements ChessPieceInterface
 {
@@ -15,7 +15,7 @@ public abstract class ChessPiece implements ChessPieceInterface
     private ArrayList<ChessLocation> threateningLocations;
 
     /**
-     * Constructor for chess pieces. Places the piece on the chess board
+     * Constructor for chess pieces. Places the piece on the chess board.
      *
      * @param owner             owner to which the piece belongs to
      * @param initialLocation   starting location of the piece
@@ -25,16 +25,17 @@ public abstract class ChessPiece implements ChessPieceInterface
     {
         this.game = game;
         player = owner;
-        location = initialLocation;
+        location = null;
         threateningLocations = new ArrayList<>();
 
         game.getChessBoard().placePieceAt(this, initialLocation); // place piece on board at initialLocation
     }
 
     /**
-     * Moves the piece to the specified location if it is a legal move
+     * Moves the piece to the specified location if it is a legal move.
      * 
      * @param  newLocation      location to move the piece to
+     * @return                  true if move is successful, otherwise false
      */
     public boolean moveTo(ChessLocation newLocation)
     {
@@ -58,6 +59,12 @@ public abstract class ChessPiece implements ChessPieceInterface
         }
     }
 
+    /**
+     * Checks the end location of the move for a piece.
+     * 
+     * @param  end              location to check
+     * @return                  true if there is no piece at end or if piece at end is opposing player's piece, otherwise false
+     */
     protected boolean checkEnd(ChessLocation end)
     {
         if (getGame().getChessBoard().isPieceAt(end.getRow(), end.getCol()) && getGame().getChessBoard().getPieceAt(end).getOwner() == this.getOwner())
@@ -67,13 +74,30 @@ public abstract class ChessPiece implements ChessPieceInterface
         return true;
     }
 
+    /**
+     *
+     * @return                  threateningLocations array
+     */
     public ArrayList<ChessLocation> getThreateningLocations()
     {
         return threateningLocations;
     }
 
+    /**
+     * Updates the locations that the piece threatens.
+     * 
+     * @param  newLocation              location to check
+     */
     protected abstract void updateThreateningLocation(ChessLocation newLocation);
 
+    /**
+     * Checks line of sight from start to finish to ensure that there are no pieces
+     * blocking a move.
+     * 
+     * @param start             starting location to check
+     * @param end               end location to check
+     * @return                  true if line of sight is clear, otherwise false
+     */
     protected boolean checkLineOfSight(ChessLocation start, ChessLocation end)
     {
         if (end.getRow() == start.getRow() && start.getCol() < end.getCol()) // if move to the right
@@ -152,9 +176,17 @@ public abstract class ChessPiece implements ChessPieceInterface
         return true;
     }
 
-    /** Each subclass has it's own algorithm for checking legality */
+    /**
+     * Checks if the new location is a legal move.
+     *
+     * @param newLocation       new location to check the legality of
+     * @return                  true if the move is legal, otherwise false
+     */
     protected abstract boolean legalMove(ChessLocation newLocation);
 
+    /**
+     * REMOVE LATER
+     */
     public void printList()
     {
         for (ChessLocation location : threateningLocations) 
@@ -162,8 +194,9 @@ public abstract class ChessPiece implements ChessPieceInterface
             System.out.println(location.getRow() + "," + location.getCol());
         }
     }
+
     /**
-    *
+     *
      * @return                  string that contains current location of the piece
      */
     public String locationString()
@@ -189,6 +222,10 @@ public abstract class ChessPiece implements ChessPieceInterface
         return location;
     }
 
+    /**
+     *
+     * @param newLocation       newlocation to set the piece to
+     */
     public void setLocation(ChessLocation newLocation)
     {
         location = newLocation;
@@ -204,7 +241,7 @@ public abstract class ChessPiece implements ChessPieceInterface
     }
 
     /**
-     * String representation of the piece
+     * String representation of the piece.
      *
      * @return                  string with character id of the piece
      */
