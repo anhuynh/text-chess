@@ -91,6 +91,10 @@ public class ChessBoard
      */
     public void placePieceAt(ChessPiece piece, ChessLocation location)
     {
+        if (isPieceAt(location.getRow(), location.getCol()))
+        {
+            getPieceAt(location).setLocation(null);
+        }
         board[location.getRow()][location.getCol()] = piece;
         piece.setLocation(location);
     }

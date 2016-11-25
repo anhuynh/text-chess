@@ -34,15 +34,21 @@ public class PlayGame
             }
 
             currentPlayer = (p1Turn) ? p1 : p2; // sets current player depending on value of p1Turn
-
+            King king = game.getKing(currentPlayer);
+            if (king.getLocation() == null)
+            {
+                System.out.println("\n" + currentPlayer + "'s king has been captured. Game over!\nHere is the final board: ");
+                System.out.println(game.getChessBoard().toString());
+                finished = true;
+                continue;
+            }
             System.out.println("\n" + currentPlayer + ", it is your turn.\nHere is the current board:\n");
             System.out.println(game.getChessBoard().toString());
 
-            if (checkOrCheckMate(currentPlayer))  // checks current player's king for check or checkmate
+            ChessPiece threat = king.check();
+            if (threat != null)
             {
-                System.out.println("Checkmate! Game over.");
-                finished = true;
-                continue;
+                System.out.println("\nCheck! Threatened by " + threat.toString() + "\n");
             }
 
             System.out.println("Enter a location (row,col e.g. \"0,2\") of the piece to move, enter \"r\" to restart the game or enter \"q\" to quit.");
@@ -121,29 +127,6 @@ public class PlayGame
         {
             System.out.println("\nI don't know what happened. You did something bad :(\n");
             return null;
-        }
-    }
-
-    /**
-     * Checks for check or checkmate.
-     *
-     * @param currentPlayer     string of current player
-     * @return                  true if checkmate, otherwise false
-     */
-    private static boolean checkOrCheckMate(String currentPlayer)
-    {
-        King king = game.getKing(currentPlayer);
-        ChessPiece piece = king.check();
-        if (!game.getChessBoard().anyPiecesLeft(king) && !king.anyMovesLeft() && piece != null) //  conditions for a checkmate
-        {
-            return true;
-        } else
-        {
-            if (piece != null)
-            {
-                System.out.println("\nCheck! Threatened by " + piece.toString());
-            }
-            return false;
         }
     }
 }
