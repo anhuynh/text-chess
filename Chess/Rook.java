@@ -29,6 +29,25 @@ public class Rook extends ChessPiece
 
     /**
      * {@inheritDoc}
+     * Legal move if move is vertical or horizontal in any direction.
+     */
+    @Override
+    public boolean moveTo(ChessLocation newLocation)
+    {
+        if (location.equals(newLocation))
+        {
+            System.out.println("\nCannot move to the same location.\n");
+            return false;
+        } else if (legalMove(newLocation))
+        {
+            return super.moveTo(newLocation);
+        }
+        System.out.println("\nInvalid location: illegal move.\n");
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
      * Legal if move is vertical or horizontal in any direction.
      */
     protected boolean legalMove(ChessLocation newLocation)

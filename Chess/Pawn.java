@@ -31,7 +31,26 @@ public class Pawn extends ChessPiece
 
     /**
      * {@inheritDoc}
-     * Legal if move is 2 or 1 spaces forward on first move and 1 space forward if not
+     * Legal if move is 2 or 1 spaces forward on first move and 1 space forward if not.
+     */
+    @Override
+    public boolean moveTo(ChessLocation newLocation)
+    {
+        if (location.equals(newLocation))
+        {
+            System.out.println("\nCannot move to the same location.\n");
+            return false;
+        } else if (legalMove(newLocation))
+        {
+            return super.moveTo(newLocation);
+        }
+        System.out.println("\nInvalid location: illegal move.\n");
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     * Legal if move is 2 or 1 spaces forward on first move and 1 space forward if not.
      * on first move.
      */
     protected boolean legalMove(ChessLocation newLocation)

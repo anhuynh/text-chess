@@ -29,6 +29,25 @@ public class Queen extends ChessPiece
 
     /**
      * {@inheritDoc}
+     * Legal move if move is horizontal, vertical or diagonal in any direction.
+     */
+    @Override
+    public boolean moveTo(ChessLocation newLocation)
+    {
+        if (location.equals(newLocation)) // if the location is the same it is still valid
+        {
+            System.out.println("\nCannot move to the same location.\n");
+            return false;
+        } else if (legalMove(newLocation)) // diagonal move or row/col move
+        {
+            return super.moveTo(newLocation);
+        }
+        System.out.println("\nInvalid location: illegal move.\n");
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
      * Legal if move is horizontal, vertical or diagonal in any direction.
      */
     protected boolean legalMove(ChessLocation newLocation)

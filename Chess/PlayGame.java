@@ -37,7 +37,7 @@ public class PlayGame
             King king = game.getKing(currentPlayer);
             if (king.getLocation() == null)
             {
-                System.out.println("\n" + currentPlayer + "'s king has been captured. Game over!\nHere is the final board: ");
+                System.out.println("\n" + currentPlayer + "'s king has been captured. Game over!\n\nHere is the final board: \n");
                 System.out.println(game.getChessBoard().toString());
                 finished = true;
                 continue;
@@ -57,7 +57,7 @@ public class PlayGame
 
             if (inp.equalsIgnoreCase("q")) // if user inputs "q", the game will finish
             {
-                System.out.println("\nSee you next time!");
+                System.out.println("\n\n" + currentPlayer + " quit the game and has lost. Game over!\n\n");
                 finished = true;
                 continue;
             }

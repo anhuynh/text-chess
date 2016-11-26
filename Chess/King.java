@@ -29,19 +29,21 @@ public class King extends ChessPiece
 
     /**
      * {@inheritDoc}
-     * Ensures that the king's move isn't threatened by any other pieces.
+     * Legal move if move is one space in any direction.
      */
+    @Override
     public boolean moveTo(ChessLocation newLocation)
     {
-        ChessPiece checkPiece = locationInDanger(newLocation);
-        if (legalMove(newLocation) && checkPiece != null)
+        if (location.equals(newLocation))
         {
-            System.out.println("\nCannot move here. Threatened by " + checkPiece.toString() + ".");
+            System.out.println("\nCannot move to the same location.\n");
             return false;
+        } else if (legalMove(newLocation))
+        {
+            return super.moveTo(newLocation);
         }
-
-        super.moveTo(newLocation);
-        return true;
+        System.out.println("\nInvalid location: illegal move.\n");
+        return false;
     }
 
     /**
@@ -117,7 +119,7 @@ public class King extends ChessPiece
      */
     protected boolean legalMove(ChessLocation newLocation)
     {
-        if ((Math.abs(newLocation.getRow() - location.getRow()) == 1) && newLocation.getCol() == location.getCol()
+        if ((Math.abs(newLocation.getRow() - location.getRow()) == 1 && newLocation.getCol() == location.getCol())
             || ((Math.abs(newLocation.getCol() - location.getCol()) == 1) && newLocation.getRow() == location.getRow())
             || (Math.abs(newLocation.getRow() - location.getRow()) == 1 && Math.abs(newLocation.getCol() - location.getCol()) == 1))
         {

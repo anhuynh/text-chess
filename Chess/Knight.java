@@ -29,6 +29,25 @@ public class Knight extends ChessPiece
 
     /**
      * {@inheritDoc}
+     * Legal move if row is +/- 2 and col is +/- 1 or row is +/- 1 and col is +/- 2.
+     */
+    @Override
+    public boolean moveTo(ChessLocation newLocation)
+    {
+        if (location.equals(newLocation))
+        {
+            System.out.println("\nCannot move to the same location.\n");
+            return false;
+        } else if (legalMove(newLocation))
+        {
+            return super.moveTo(newLocation);
+        }
+        System.out.println("\nInvalid location: illegal move.\n");
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
      * Legal if row is +/- 2 and col is +/- 1 or row is +/- 1 and col is +/- 2.
      */
     protected boolean legalMove(ChessLocation newLocation)

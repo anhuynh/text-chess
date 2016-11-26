@@ -39,24 +39,14 @@ public abstract class ChessPiece implements ChessPieceInterface
      */
     public boolean moveTo(ChessLocation newLocation)
     {
-        if (legalMove(newLocation) && checkLineOfSight(location, newLocation) && checkEnd(newLocation))
+        if (checkLineOfSight(location, newLocation) && checkEnd(newLocation))
         {
             getGame().getChessBoard().removePiece(location);   // removes the piece from the old location
             getGame().getChessBoard().placePieceAt(this, newLocation);  // places the piece at the new location
-            location = newLocation;
             return true;
-        } else
-        {
-            if (!legalMove(newLocation))
-            {
-                System.out.println("\nInvalid location: illegal move\n");
-                return false;
-            } else
-            {
-                System.out.println("\nInvalid location: blocked by another piece\n");
-                return false;
-            }
         }
+        System.out.println("\nInvalid location: blocked by another piece.\n");
+        return false;
     }
 
     /**

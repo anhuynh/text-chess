@@ -91,9 +91,9 @@ public class ChessBoard
      */
     public void placePieceAt(ChessPiece piece, ChessLocation location)
     {
-        if (isPieceAt(location.getRow(), location.getCol()))
+        if (board[location.getRow()][location.getCol()] != null) // checks if there is a piece here to capture
         {
-            getPieceAt(location).setLocation(null);
+            board[location.getRow()][location.getCol()].setLocation(null); // set the piece at the new location to null
         }
         board[location.getRow()][location.getCol()] = piece;
         piece.setLocation(location);
@@ -107,26 +107,5 @@ public class ChessBoard
     public void removePiece(ChessLocation location)
     {
         board[location.getRow()][location.getCol()] = null;
-    }
-
-    /**
-     * Checks if there are any pieces left.
-     *
-     * @param king              king of the current player to check
-     * @return                  true if there are pieces left other than the king, otherwise false
-     */
-    public boolean anyPiecesLeft(ChessPiece king)
-    {
-        for (ChessPiece[] rows : board)
-        {
-            for (ChessPiece piece : rows)
-            {
-                if (piece != null && piece.getOwner().equals(king.getOwner()) && piece != king)
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
