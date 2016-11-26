@@ -77,28 +77,6 @@ public class King extends ChessPiece
     }
 
     /**
-     * Checks if the king can make any moves that are not being threatened.
-     * 
-     * @return                  true if king can make a move, otherwise false
-     */
-    public boolean anyMovesLeft()
-    {
-        for (int row = 0; row < 8; row++) // go through entire board
-        {
-            for (int col = 0; col < 8; col++)
-            {
-                ChessLocation location = new ChessLocation(row, col);
-                if (locationInDanger(location) == null && legalMove(location)) // check for a free move
-                {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Determines if the king is in check.
      * 
      * @return                  ChessPiece that is threatening the king, otherwise return null
