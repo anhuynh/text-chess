@@ -2,4 +2,5 @@
 *.class
 *.ctxt
 *.bluej
-*.jar
+*.txt
+doc
